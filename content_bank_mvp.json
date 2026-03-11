@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "version": "mvp_v2",
+    "total": 9,
+    "levels": ["B1"],
+    "categories": ["meetings", "clarification", "scheduling", "paraphrase", "speed_drills"],
+    "target_user": "Japanese business English learners",
+    "design_principles": [
+      "Model answers must strictly match the scenario",
+      "Do not introduce unstated facts",
+      "Use short, natural business English",
+      "Keep prompts practical and realistic for workplace use",
+      "Make Japanese hints supportive but brief"
+    ]
+  },
+  "prompts": [
+    {
+      "id": 1,
+      "type": "situation",
+      "category": "meetings",
+      "level": "B1",
+      "jp_hint": "進捗は順調だと伝える",
+      "situation": "Your manager asks: 'How is the project going?' Everything is on schedule.",
+      "model_answer": "Everything is on track. We should finish on time."
+    },
+    {
+      "id": 2,
+      "type": "situation",
+      "category": "meetings",
+      "level": "B1",
+      "jp_hint": "プロジェクトが2日遅れると伝える",
+      "situation": "Your manager asks about the project. It will be two days late.",
+      "model_answer": "I'm afraid the project will be two days late."
+    },
+    {
+      "id": 3,
+      "type": "situation",
+      "category": "clarification",
+      "level": "B1",
+      "jp_hint": "会議で説明がわからなかったので確認する",
+      "situation": "A colleague explains something in a meeting, but you don't understand it.",
+      "model_answer": "I'm sorry, but I didn't quite understand. Could you explain that again?"
+    },
+    {
+      "id": 4,
+      "type": "situation",
+      "category": "scheduling",
+      "level": "B1",
+      "jp_hint": "会議を来週に変更したい",
+      "situation": "You need to move a meeting to next week.",
+      "model_answer": "Could we move this meeting to next week?"
+    },
+    {
+      "id": 5,
+      "type": "situation",
+      "category": "clarification",
+      "level": "B1",
+      "jp_hint": "今すぐ答えられないので確認してから連絡すると伝える",
+      "situation": "A client asks you a question, but you need to check the details before answering.",
+      "model_answer": "Let me check the details, and I'll get back to you."
+    },
+    {
+      "id": 6,
+      "type": "paraphrase",
+      "category": "paraphrase",
+      "level": "B1",
+      "jp_hint": "別の自然な言い方を練習する",
+      "prompt": "The project is late.",
+      "version_a": "The project is behind schedule.",
+      "version_b": "There has been a delay in the project."
+    },
+    {
+      "id": 7,
+      "type": "paraphrase",
+      "category": "paraphrase",
+      "level": "B1",
+      "jp_hint": "やわらかく確認する言い方",
+      "prompt": "I don't understand.",
+      "version_a": "Could you explain that again?",
+      "version_b": "I'm not sure I understand."
+    },
+    {
+      "id": 8,
+      "type": "paraphrase",
+      "category": "paraphrase",
+      "level": "B1",
+      "jp_hint": "少し丁寧に言い換える",
+      "prompt": "I need more time.",
+      "version_a": "I need a little more time.",
+      "version_b": "Could I have a bit more time?"
+    },
+    {
+      "id": 9,
+      "type": "speed_drill",
+      "category": "speed_drills",
+      "level": "B1",
+      "jp": "少し遅れています",
+      "en": "We're slightly behind schedule."
+    },
+    {
+      "id": 10,
+      "type": "speed_drill",
+      "category": "speed_drills",
+      "level": "B1",
+      "jp": "確認してからご連絡します",
+      "en": "Let me check and get back to you."
+    },
+    {
+      "id": 11,
+      "type": "speed_drill",
+      "category": "speed_drills",
+      "level": "B1",
+      "jp": "もう一度説明していただけますか",
+      "en": "Could you explain that again?"
+    }
+  ]
+}

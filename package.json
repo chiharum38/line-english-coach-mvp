@@ -1,0 +1,22 @@
+{
+  "name": "line-english-coach-mvp",
+  "version": "1.0.0",
+  "description": "LINE AI English Speaking Coach — MVP",
+  "main": "bot_server.js",
+  "scripts": {
+    "start": "node bot_server.js",
+    "dev": "nodemon bot_server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@line/bot-sdk": "^9.0.0",
+    "dotenv": "^16.3.0",
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
