@@ -69,7 +69,7 @@ const WELCOME_JP =
 
 // [CHANGE 5] Text-first intro — shown when user types "start"
 const START_INTRO =
-  `✍️ 3分スピーキングチェック\n\n` +
+  `✍️ 3分英語チェック\n\n` +
   `3問だけ英語で答えてください。\n\n` +
   `1️⃣ 状況（Situation）を読む\n` +
   `2️⃣ 英語をテキストで入力する\n` +
@@ -99,9 +99,6 @@ function buildQuestionText(round, prompt) {
       ``,
       `✅ Task（やること）`,
       task,
-      ``,
-      `💡 ヒント`,
-      prompt.jp_hint,
     );
   } else if (prompt.type === "paraphrase") {
     const task = prompt.task || `次のフレーズを、2つの違う言い方で書いてください。`;
@@ -111,9 +108,6 @@ function buildQuestionText(round, prompt) {
       ``,
       `✅ Task（やること）`,
       task,
-      ``,
-      `💡 ヒント`,
-      prompt.jp_hint,
     );
   } else if (prompt.type === "speed_drill") {
     const task = prompt.task || `下の日本語を英語に訳してください。`;
@@ -177,7 +171,7 @@ function buildFeedbackText(evaluation, round) {
   }
 
   if (round < 3) {
-    msg += `━━━━━━━━━━━━\n「next」と送って次の問題へ 👉`;
+    msg += `━━━━━━━━━━━━\n次の問題を送ります... 👉`;
   } else {
     msg += `━━━━━━━━━━━━\nお疲れさまでした！結果をまとめています...`;
   }
@@ -196,7 +190,7 @@ function buildSummaryText(feedbacks) {
     .map(a => a.trim());
 
   return (
-    `🎉 お疲れさまでした！\nスピーキングチェック完了です。\n\n` +
+    `🎉 お疲れさまでした！\n3分英語チェック完了です。\n\n` +
     `━━━━━━━━━━━━\n` +
     `📊 結果\n` +
     `${correct} / ${total} 問 正解\n\n` +
@@ -328,14 +322,26 @@ async function processAnswer(userId, transcript, roundIndex) {
     text: buildFeedbackText(evaluation, round),
   });
 
-  // Advance session state
+  // Advance session state and auto-send next question
   if (round === 1) {
-    session.step = "r1_done";
+    session.step = "r2";
+    setTimeout(async () => {
+      await lineClient.pushMessage(userId, {
+        type: "text",
+        text: buildQuestionText(2, MVP_QUIZ[1]),
+      });
+    }, 1500);
   } else if (round === 2) {
-    session.step = "r2_done";
+    session.step = "r3";
+    setTimeout(async () => {
+      await lineClient.pushMessage(userId, {
+        type: "text",
+        text: buildQuestionText(3, MVP_QUIZ[2]),
+      });
+    }, 1500);
   } else if (round === 3) {
     session.step      = "done";
-    session.completed = true; // [CHANGE 10]
+    session.completed = true;
     setTimeout(async () => {
       await lineClient.pushMessage(userId, {
         type: "text",
