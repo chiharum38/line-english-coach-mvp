@@ -59,13 +59,11 @@ function resetSession(userId) {
 
 // Shown when user first adds the bot as a friend
 const WELCOME_JP =
-  `こんにちは！👋\n` +
-  `AI English Speaking Coachへようこそ。\n\n` +
-  `ビジネス英語の練習ができる\n` +
-  `3問スピーキングチェックです。\n\n` +
+  `こんにちは！\n` +
+  `AI English Speaking Coachへようこそ。\n` +
+  `ビジネス英語の練習ができる3問英語チェックです。\n` +
   `━━━━━━━━━━━━\n` +
-  `「start」と送ってください。\n` +
-  `クイズが始まります 👍`;
+  `「start」と送ってください。クイズが始まります`;
 
 // [CHANGE 5] Text-first intro — shown when user types "start"
 const START_INTRO =
@@ -464,7 +462,7 @@ async function handleText(event) {
   // Truly idle
   await lineClient.replyMessage(event.replyToken, {
     type: "text",
-    text: `「start」と送るとスピーキングチェックが始まります ✍️`,
+    text: `「start」と送ってください。クイズが始まります`,
   });
 }
 
@@ -483,7 +481,7 @@ async function handleAudio(event) {
     type: "text",
     text: inRound
       ? `現在、音声回答は調整中です。\nお手数ですが、英語をテキストで入力してください 🙏`
-      : `「start」と送ってクイズを始めてください ✍️`,
+      : `「start」と送ってください。クイズが始まります`,
   });
 }
 
