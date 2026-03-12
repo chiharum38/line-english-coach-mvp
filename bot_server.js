@@ -483,6 +483,14 @@ async function handleAudio(event) {
 //  WEBHOOK
 // ══════════════════════════════════════════════════════
 
+// Raw logger — fires BEFORE LINE middleware, so we can see if requests arrive at all
+app.use((req, res, next) => {
+  if (req.path === "/webhook") {
+    console.log(`[Webhook] Incoming ${req.method} — signature: ${req.headers["x-line-signature"] ? "present" : "MISSING"}`);
+  }
+  next();
+});
+
 app.post("/webhook", middleware(lineConfig), async (req, res) => {
   res.sendStatus(200); // Always respond to LINE immediately
 
@@ -507,6 +515,14 @@ app.post("/webhook", middleware(lineConfig), async (req, res) => {
       console.error("[Webhook] Event handler error:", err.message);
     }
   }
+});
+
+// LINE middleware error handler — catches signature failures (must be AFTER routes)
+app.use((err, req, res, next) => {
+  if (req.path === "/webhook") {
+    console.error("[Webhook] Middleware rejected request — likely wrong LINE_CHANNEL_SECRET:", err.status, err.message);
+  }
+  res.sendStatus(err.status || 500);
 });
 
 // Health check — shows configuration state at a glance
