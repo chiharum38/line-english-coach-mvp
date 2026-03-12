@@ -355,17 +355,19 @@ async function handleText(event) {
   const text    = event.message.text.trim().toLowerCase();
   const session = getSession(userId);
 
+  // ── RESET (testing only) ───────────────────────────
+  if (text === "reset") {
+    resetSession(userId);
+    await lineClient.replyMessage(event.replyToken, {
+      type: "text",
+      text: `🔄 セッションをリセットしました。\n「start」と送って再開できます。`,
+    });
+    return;
+  }
+
   // ── START ──────────────────────────────────────────
   if (text === "start") {
-    // [CHANGE 10] Block retaking if already completed
-    if (session.completed) {
-      await lineClient.replyMessage(event.replyToken, {
-        type: "text",
-        text: `このクイズは1回のみ受験できます。\nご参加ありがとうございました 🙏`,
-      });
-      return;
-    }
-
+    // Allow restart — just reset and go again
     resetSession(userId);
     const s = getSession(userId);
     s.step  = "r1";
